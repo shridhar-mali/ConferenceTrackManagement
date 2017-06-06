@@ -1,17 +1,15 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package com.conference;
 
-import java.time.OffsetTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Shridhar on 5/27/2017.
- */
 public class Session {
-
     private List<Talk> talks;
     private int duration;
     private Time nextAvailableTime;
@@ -23,35 +21,37 @@ public class Session {
         this.beginAt = new Time(beginAt);
         this.nextAvailableTime = this.beginAt;
         this.minsLeft = duration;
-        this.talks = new ArrayList<>();
+        this.talks = new ArrayList();
     }
 
     public Time getNextAvailableTime() {
-        return nextAvailableTime;
+        return this.nextAvailableTime;
     }
 
     public int getDuration() {
-        return duration;
+        return this.duration;
     }
+
     public void addTalk(Talk talk) {
-        talk.setStartTime(nextAvailableTime);
-        talks.add(talk);
-        nextAvailableTime.incrementMinutesBy(talk.length());
-        minsLeft = minsLeft - talk.length();
+        talk.setStartTime(this.nextAvailableTime);
+        this.talks.add(talk);
+        this.nextAvailableTime.incrementMinutesBy(talk.length());
+        this.minsLeft -= talk.length();
     }
 
     public boolean canAccomodate(Talk talk) {
-        return minsLeft >= talk.length();
+        return this.minsLeft >= talk.length();
     }
 
-    @Override
     public String toString() {
         StringBuilder sessionDetails = new StringBuilder();
-        for(Talk talk : talks) {
+        Iterator var2 = this.talks.iterator();
+
+        while(var2.hasNext()) {
+            Talk talk = (Talk)var2.next();
             sessionDetails.append(talk);
         }
+
         return sessionDetails.toString();
     }
-
-
 }

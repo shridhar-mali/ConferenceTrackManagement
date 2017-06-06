@@ -1,16 +1,14 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package com.conference;
 
-import java.time.OffsetTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Shridhar on 5/27/2017.
- */
 public class Track {
-
     private Session morningSession;
     private Session lunch;
     private Session eveningSession;
@@ -29,30 +27,32 @@ public class Track {
     }
 
     public void addTalks(List<Talk> talks) {
-        for (Iterator<Talk> itr =talks.iterator(); itr.hasNext();) {
-            Talk talk = (Talk) itr.next();
-            if (canAccomodate(talk)) {
-                addTalk(talk);
+        Iterator itr = talks.iterator();
+
+        while(itr.hasNext()) {
+            Talk talk = (Talk)itr.next();
+            if(this.canAccomodate(talk)) {
+                this.addTalk(talk);
                 itr.remove();
             }
         }
 
     }
+
     private void addTalk(Talk talk) {
-        if (this.morningSession.canAccomodate(talk)) {
+        if(this.morningSession.canAccomodate(talk)) {
             this.morningSession.addTalk(talk);
-        } else if (this.eveningSession.canAccomodate(talk)) {
+        } else if(this.eveningSession.canAccomodate(talk)) {
             this.eveningSession.addTalk(talk);
         }
+
     }
 
     public Time finishTime() {
-        return eveningSession.getNextAvailableTime();
+        return this.eveningSession.getNextAvailableTime();
     }
 
-    @Override
     public String toString() {
-        return this.name + ":" + System.lineSeparator() + morningSession + lunch
-                + eveningSession;
+        return this.name + ":" + System.lineSeparator() + this.morningSession + this.lunch + this.eveningSession;
     }
 }

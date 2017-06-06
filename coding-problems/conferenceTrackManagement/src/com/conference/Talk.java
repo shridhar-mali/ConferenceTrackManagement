@@ -1,46 +1,45 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package com.conference;
 
-/**
- * Created by Shridhar on 5/27/2017.
- */
 public class Talk implements Comparable {
     private String title;
     private int length;
     private Time startTime;
 
     public int length() {
-        return length;
+        return this.length;
     }
 
     public Time getStartTime() {
-        return startTime;
+        return this.startTime;
     }
 
-    public Talk(final String title, final int length) {
+    public Talk(String title, int length) {
         if(title.matches(".*\\d+.*")) {
             throw new IllegalArgumentException(title + " - Title is Invalid because it contains number");
+        } else {
+            this.title = title;
+            this.length = length;
         }
-        this.title = title;
-        this.length = length;
-
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setStartTime(Time nextAvailableTime) {
         this.startTime = new Time(nextAvailableTime);
     }
 
-    @Override
     public String toString() {
-        return "\n" + startTime + " " + getTitle() + " " + (length() == 5 ? "lightening" : length() + "min");
+        return "\n" + this.startTime + " " + this.getTitle() + " " + (this.length() == 5?"lightening":this.length() + "min");
     }
 
-    @Override
     public int compareTo(Object talk) {
-        talk = (Talk) talk;
-        return length > ((Talk) talk).length() ? -1 : 0;
+        return this.length > ((Talk)talk).length()?-1:0;
     }
 }
