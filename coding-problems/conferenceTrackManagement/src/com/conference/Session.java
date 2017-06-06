@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.conference;
 
 import java.util.ArrayList;
@@ -45,13 +40,9 @@ public class Session {
 
     public String toString() {
         StringBuilder sessionDetails = new StringBuilder();
-        Iterator var2 = this.talks.iterator();
-
-        while(var2.hasNext()) {
-            Talk talk = (Talk)var2.next();
+        for(Talk talk : talks) {
             sessionDetails.append(talk);
         }
-
         return sessionDetails.toString();
     }
 }

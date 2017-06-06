@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.conference;
 
 import java.util.ArrayList;
@@ -15,25 +10,17 @@ public class Conference {
 
     public Conference(List<Track> tracks) throws InstantiationException {
         this.tracks.addAll(tracks);
-        this.networkingEvent = new NetworkingEvent(this.calculateNetworkingStartTime());
+        this.networkingEvent = new NetworkingEvent(calculateNetworkingStartTime());
     }
 
     private Time calculateNetworkingStartTime() {
         Time networkingEventStartTime = null;
-        Iterator var2 = this.tracks.iterator();
-
-        while(true) {
-            Track track;
-            do {
-                if(!var2.hasNext()) {
-                    return networkingEventStartTime;
-                }
-
-                track = (Track)var2.next();
-            } while(networkingEventStartTime != null && !networkingEventStartTime.before(track.finishTime()));
-
-            networkingEventStartTime = track.finishTime();
+        for(Track track : tracks) {
+            if(networkingEventStartTime == null || networkingEventStartTime.before(track.finishTime())) {
+                networkingEventStartTime = track.finishTime();
+            }
         }
+        return networkingEventStartTime;
     }
 
     public void addTrack(Track track) {
