@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Conference {
     private final List<Track> tracks = new ArrayList();
-    private NetworkingEvent networkingEvent;
+    private final NetworkingEvent networkingEvent;
 
     public Conference(List<Track> tracks) throws InstantiationException {
         this.tracks.addAll(tracks);
@@ -23,22 +23,14 @@ public class Conference {
         return networkingEventStartTime;
     }
 
-    public void addTrack(Track track) {
-        this.tracks.add(track);
-    }
-
     public String toString() {
         StringBuilder confDetails = new StringBuilder();
-        Iterator var2 = this.tracks.iterator();
-
-        while(var2.hasNext()) {
-            Track track = (Track)var2.next();
+        for(Track track : tracks) {
             confDetails.append(System.lineSeparator());
             confDetails.append(track);
-            confDetails.append(this.networkingEvent);
+            confDetails.append(networkingEvent);
             confDetails.append(System.lineSeparator());
         }
-
         return confDetails.toString();
     }
 }
